@@ -15,7 +15,7 @@ class BusRoutesTableViewController: UITableViewController {
     var activeRoutes = [BusInfo]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //navigationItem.backBarButtonItem!.tintColor = UIColor.whiteColor()
         
         for route in (currentInfo?.busStopInfo)!{
             for pred in route.prediction{

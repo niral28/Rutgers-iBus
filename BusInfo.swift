@@ -15,6 +15,24 @@ struct BusInfo{
 }
 
 struct BusStopInformation {
+    var busStop:String = ""
+    var busStopInfo: [BusInfo] = []
+}
+
+struct BusRouteInfo {
     var busStop:String
-    var busStopInfo: [BusInfo]
+    var stopTag:String 
+}
+
+func encode<BusStopInformation>(var value: BusStopInformation) -> NSData {
+    return withUnsafePointer(&value) { p in
+        NSData(bytes: p, length: sizeofValue(value))
+    }
+}
+
+func decode<BusStopInformation>(data: NSData) -> BusStopInformation {
+    let pointer = UnsafeMutablePointer<BusStopInformation>.alloc(sizeof(BusStopInformation))
+    data.getBytes(pointer, length: sizeof(BusStopInformation))
+    
+    return pointer.move()
 }
